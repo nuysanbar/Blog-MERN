@@ -1,0 +1,25 @@
+body{
+    margin:0;
+    padding:0;
+}
+.main{
+    background-color: lightgray;
+    height: 100vh;
+    min-width: 500px;
+    margin:0 auto;
+    width: 50%;
+}
+.Header{
+    color:rgb(136, 134, 134);
+    margin:0;
+    padding:20px 0;
+}
+.outlet{
+    height: 60vh;
+    overflow-y: scroll;
+}
+.Footer{
+    color:white;
+    padding:20px 0;
+    background-color: gray;
+}
