@@ -1,7 +1,7 @@
 const Missing=()=>{
     return(
         <main>
-            <h1>Missing</h1>
+            <h1>This page is not available</h1>
         </main>
     )
 }

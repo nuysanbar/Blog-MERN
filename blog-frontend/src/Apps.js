@@ -1,38 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {BrowserRouter,Route,Routes} from 'react-router-dom';
 import './index.css';
 import Nav from "./Nav";
 import Home from './Home';
 import About  from "./About";
-import Header from "./Header";
-import Footer from "./Footer";
 import NewPost from "./NewPost";
 import Missing from "./Missing";
 import PostPage from "./PostPage";
+import axios from 'axios';
 const Apps =()=>{
+    // important variable to store form data
     const [search,setSearch]=useState('')
     const [posts,setPosts]=useState([]);
     const [newTitle,setNewTitle]=useState('');
     const [newPost,setNewPost]=useState('');
-    const handleSubmit=(e)=>{
+    // for defining our api with axios
+    const api=axios.create({
+      baseURL:`http://localhost:3500/reactBlog`
+    })
+    // to get all contents in the api
+    async function fetchData(){
+      const res=await api.get('/');
+      return setPosts(res.data.reverse())
+    }
+    fetchData();
+    // to create a content
+    const handleSubmit=async(e)=>{
         e.preventDefault();
-        var id=posts.length;
-        const createPost={id:id,title:newTitle,post:newPost,date:"35/45/54"}
-        const newPosts=[...posts,createPost]
-        setPosts(newPosts);
-        setNewTitle('');
+        var result= await api.post('/',{title:newTitle,content:newPost});
+        console.log(result);
+        fetchData();
+        setNewTitle('');  
         setNewPost('');
     }
-    const handleDelete=()=>{
-        return 
+    // to delete a content
+    const handleDelete=async (id)=>{
+        const result= await api.delete(`/post/${id}`);
+        console.log(result);
     }
     return (
         <main className="main">
-        <Header />
         <BrowserRouter>
         <Routes>
           <Route path="/" element={<Nav search={search} setSearch={setSearch}/>}>
-            <Route index element={<Home posts={posts}/>} />
+            <Route index element={<Home posts={posts.filter((post)=>post.title.toLowerCase().includes(search))}/>} />
             <Route path="/About" element={<About/>} />
             <Route path="/post" 
                     element={<NewPost 
@@ -48,7 +59,6 @@ const Apps =()=>{
           </Route>
         </Routes>
       </BrowserRouter>
-      <Footer />
       </main>
     )
 }

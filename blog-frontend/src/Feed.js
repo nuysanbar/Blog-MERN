@@ -3,7 +3,7 @@ const Feed=({posts})=>{
         return (
             <article className="Feed">
                 {posts.map((post)=>(
-                    <POST post={post} key={post.id} />
+                    <POST post={post} key={post._id} />
                 ))}
             </article>
         )

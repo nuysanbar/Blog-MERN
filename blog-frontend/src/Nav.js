@@ -2,7 +2,9 @@ import {Link,Outlet} from "react-router-dom";
 const Nav=({search,setSearch})=>{
     return(
         <div>
+        <div className="outerNavigation">
         <div className="navigation">
+        <div className="logo">React Blog</div>
         <form className="searchForm" onSubmit={(e)=>e.preventDefault()}>
             <label htmlFor="search">Search</label>
             <input 
@@ -19,8 +21,8 @@ const Nav=({search,setSearch})=>{
             <li><Link to="/about" className="aboutLink">About</Link></li>
         </ul>
         </div>
+        </div>
         <div  className="outlet"><Outlet /></div>
-        
         </div>
        
     )

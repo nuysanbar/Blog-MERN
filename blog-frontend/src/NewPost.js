@@ -1,7 +1,7 @@
 const NewPost=({newTitle,setNewTitle,newPost,setNewPost,handleSubmit})=>{
     return(
-        <div>
-            <form className="newPost" action="/">
+        <div className="newPost">
+            <form action="/">
                 <label htmlFor="postTitle">Title</label>
                 <input
                     autoFocus
@@ -15,7 +15,7 @@ const NewPost=({newTitle,setNewTitle,newPost,setNewPost,handleSubmit})=>{
                 <textarea
                     id="post"
                     value={newPost}
-                    placeholder="post"
+                    placeholder="content"
                     onChange={(e)=>setNewPost(e.target.value)}
                 />
                 <button type="submit" onClick={handleSubmit}>Post</button>
